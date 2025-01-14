@@ -22,8 +22,115 @@ public class APIEndpointsTest {
     }
 
 
+    /**
+     * Validate that it's not possible to use GET property endpoint with wrong credentials
+     */
     @Test
-    public void testPropertiesGetRequest() {
+    public void testGetProperty_Unauthorized() {
+        String username = "wrong_username";
+        String password = "wrong_password";
+
+        // Get authentication headers
+        Headers headers = BasicAuthentication.getBasicAuthHeaders(username, password);
+
+        // Perform GET request
+        Response response = given()
+                .headers(headers)
+                .when()
+                .get("/properties")
+                .then()
+                .extract()
+                .response();
+
+        // Validate the response
+        Assert.assertEquals(response.getStatusCode(), 401, "Expected status code 401");
+        System.out.println("GET Response: " + response.asString());
+    }
+
+    /**
+     * Validate that it's not possible to use POST property endpoint with wrong credentials
+     */
+    @Test
+    public void testPostProperty_Unauthorized() {
+        String username = "wrong_username";
+        String password = "wrong_password";
+
+        // Get authentication headers
+        Headers headers = BasicAuthentication.getBasicAuthHeaders(username, password);
+
+        // Perform GET request
+        Response response = given()
+                .headers(headers)
+                .when()
+                .get("/properties")
+                .then()
+                .extract()
+                .response();
+
+        response.then().log().all();
+
+        // Validate the response
+        Assert.assertEquals(response.getStatusCode(), 401, "Expected status code 401");
+        System.out.println("POST Response: " + response.asString());
+    }
+
+    /**
+     * Validate that it's not possible to use GET bookings endpoint with wrong credentials
+     */
+    @Test
+    public void testGetBookings_Unauthorized() {
+        String username = "wrong_username";
+        String password = "wrong_password";
+
+        // Get authentication headers
+        Headers headers = BasicAuthentication.getBasicAuthHeaders(username, password);
+
+        // Perform GET request
+        Response response = given()
+                .headers(headers)
+                .when()
+                .get("/bookings")
+                .then()
+                .extract()
+                .response();
+
+        // Validate the response
+        Assert.assertEquals(response.getStatusCode(), 401, "Expected status code 401");
+        System.out.println("GET Response: " + response.asString());
+    }
+
+    /**
+     * Validate that it's not possible to use POST bookings endpoint with wrong credentials
+     */
+    @Test
+    public void testPostBookings_Unauthorized() {
+        String username = "wrong_username";
+        String password = "wrong_password";
+
+        // Get authentication headers
+        Headers headers = BasicAuthentication.getBasicAuthHeaders(username, password);
+
+        // Perform GET request
+        Response response = given()
+                .headers(headers)
+                .when()
+                .get("/bookings")
+                .then()
+                .extract()
+                .response();
+
+        response.then().log().all();
+
+        // Validate the response
+        Assert.assertEquals(response.getStatusCode(), 401, "Expected status code 401");
+        System.out.println("POST Response: " + response.asString());
+    }
+
+    /**
+     * Validate that GET property endpoint is working fine
+     */
+    @Test
+    public void testGetProperties() {
         // Get authentication headers
         Headers headers = BasicAuthentication.getBasicAuthHeaders();
 
@@ -42,8 +149,11 @@ public class APIEndpointsTest {
         System.out.println("GET Response: " + response.asString());
     }
 
+    /**
+     * Validate that POST property endpoint is working fine
+     */
     @Test
-    public void testPropertiesPostRequest() {
+    public void testPostProperties_ValidInput() {
         // Get authentication headers
         Headers headers = BasicAuthentication.getBasicAuthHeaders();
 
@@ -79,8 +189,11 @@ public class APIEndpointsTest {
 
     }
 
+    /**
+     * Validate that GET bookings endpoint is working fine
+     */
     @Test
-    public void testBookingsGetRequest() {
+    public void testGetBookings() {
         // Get authentication headers
         Headers headers = BasicAuthentication.getBasicAuthHeaders();
 
@@ -99,8 +212,11 @@ public class APIEndpointsTest {
         System.out.println("GET Response: " + response.asString());
     }
 
+    /**
+     * Validate that POST bookings endpoint is working fine
+     */
     @Test
-    public void testBookingsPostRequest() {
+    public void testPostBookings() {
         // Get authentication headers
         Headers headers = BasicAuthentication.getBasicAuthHeaders();
 
@@ -133,38 +249,8 @@ public class APIEndpointsTest {
         System.out.println("POST Response: " + response.asString());
     }
 
-//    @Test (priority = 1)
-//    public void testGetWithBasicAuth_Success() {
-//
-//        String endpoint = "/properties"; // Replace with your actual endpoint
-//
-//        Response response = api.getWithBasicAuth(endpoint);
-//
-//        response.then().log().all();
-//
-//        // Validate the response
-//        Assert.assertEquals(response.getStatusCode(), 200, "Expected status code 200");
-//
-//        // Add additional assertions as necessary
-//        Assert.assertNotNull(response.getBody(), "Response body should not be null");
-//    }
-//
-//    //@Test
-//    public void testGetWithBasicAuth_Unauthorized() {
-//        // Override credentials for testing unauthorized scenario
-//        Response response = RestAssured
-//                .given()
-//                .auth()
-//                .preemptive()
-//                .basic("wrong_username", "wrong_password")
-//                .when()
-//                .get("/properties"); // Replace with your actual endpoint
-//
-//        // Validate the response
-//        Assert.assertEquals(response.getStatusCode(), 401, "Expected status code 401");
-//    }
 
-//
+
 //    }
 //
 //    @AfterSuite
