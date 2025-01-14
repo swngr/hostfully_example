@@ -11,7 +11,7 @@ import io.restassured.http.Headers;
 import static io.restassured.RestAssured.given;
 
 
-public class PropertiesTest {
+public class APIEndpointsTest {
 
     Property propertyPayload;
 
@@ -23,7 +23,7 @@ public class PropertiesTest {
 
 
     @Test
-    public void testGetRequest() {
+    public void testPropertiesGetRequest() {
         // Get authentication headers
         Headers headers = BasicAuthentication.getBasicAuthHeaders();
 
@@ -32,8 +32,9 @@ public class PropertiesTest {
                 .headers(headers)
                 .when()
                 .get("/properties")
-                        .then()
-                                .extract().response();
+                .then()
+                .extract()
+                .response();
 
 
         // Assertions
@@ -42,7 +43,7 @@ public class PropertiesTest {
     }
 
     @Test
-    public void testPostRequest() {
+    public void testPropertiesPostRequest() {
         // Get authentication headers
         Headers headers = BasicAuthentication.getBasicAuthHeaders();
 
@@ -76,6 +77,60 @@ public class PropertiesTest {
         Assert.assertEquals(response.getStatusCode(), 201, "Status code should be 201");
         System.out.println("POST Response: " + response.asString());
 
+    }
+
+    @Test
+    public void testBookingsGetRequest() {
+        // Get authentication headers
+        Headers headers = BasicAuthentication.getBasicAuthHeaders();
+
+        // Perform GET request
+        Response response = given()
+                .headers(headers)
+                .when()
+                .get("/bookings")
+                .then()
+                .extract()
+                .response();
+
+
+        // Assertions
+        Assert.assertEquals(response.getStatusCode(), 200, "Status code should be 200");
+        System.out.println("GET Response: " + response.asString());
+    }
+
+    @Test
+    public void testBookingsPostRequest() {
+        // Get authentication headers
+        Headers headers = BasicAuthentication.getBasicAuthHeaders();
+
+        // Define request body
+        String requestBody = "{\n" +
+                "\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n" +
+                "  \"startDate\": \"2024-01-15\",\n" +
+                "  \"endDate\": \"2024-01-15\",\n" +
+                "  \"status\": \"SCHEDULED\",\n" +
+                "  \"guest\": {\n" +
+                "    \"firstName\": \"swngr\",\n" +
+                "    \"lastName\": \"swngrLast\",\n" +
+                "    \"dateOfBirth\": \"2025-01-14\"\n" +
+                "  },\n" +
+                "  \"propertyId\": \"ff288cc0-c049-4bc4-a96d-01637466bed4\"\n" +
+                "}";
+
+        Response response = given()
+                .headers(headers)
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(requestBody)
+                .when()
+                .post("/bookings");
+
+        response.then().log().all();
+
+        // Assertions
+        Assert.assertEquals(response.getStatusCode(), 201, "Status code should be 201");
+        System.out.println("POST Response: " + response.asString());
     }
 
 //    @Test (priority = 1)
