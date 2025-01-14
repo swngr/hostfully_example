@@ -1,7 +1,6 @@
 
-
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import io.restassured.authentication.PreemptiveBasicAuthScheme;
 
 public class BasicAuthApi {
 
@@ -14,17 +13,12 @@ public class BasicAuthApi {
         RestAssured.baseURI = BASE_URL;
     }
 
-    // Method to perform GET request with Basic Authentication
-    public Response getWithBasicAuth(String endpoint) {
-        return RestAssured
-                .given()
-                .auth()
-                .preemptive()
-                .basic(USERNAME, PASSWORD)
-                .when()
-                .get(endpoint);
+    // Method to configure Basic Authentication
+    public void configureBasicAuth() {
+        PreemptiveBasicAuthScheme authScheme = new PreemptiveBasicAuthScheme();
+        authScheme.setUserName(USERNAME);
+        authScheme.setPassword(PASSWORD);
+        RestAssured.authentication = authScheme;
     }
-
-
 
 }

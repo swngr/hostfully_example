@@ -6,11 +6,11 @@ public class Routes {
 
     //properties
     public static String properties_get_url = base_url + "/properties";
-    public static String properties_post_url = base_url + "/properties/{username}";
+    public static String properties_post_url = base_url + "/properties";
 
     //booking
     public static String booking_get_url = base_url + "/bookings";
-    public static String booking_post_url = base_url + "/bookings/{username}";
+    public static String booking_post_url = base_url + "/bookings";
 
 
 }
