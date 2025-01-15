@@ -322,7 +322,7 @@ public class APIEndpointsTest {
      * Booking creation -> SUCCESSFUL
      */
     @Test
-    public void testPostBookings() {
+    public void testPostBookings_Valid() {
         // Get authentication headers
         Headers headers = BasicAuthentication.getBasicAuthHeaders();
         // Creating the request body
