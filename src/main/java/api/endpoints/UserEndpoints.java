@@ -1,6 +1,6 @@
 package api.endpoints;
 
-import api.payload.Property;
+import api.payload.PropertyPayload;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -8,20 +8,20 @@ import static io.restassured.RestAssured.given;
 
 public class UserEndpoints {
 
-    public static Response createUser(Property payload) {
+    public static Response createUser(PropertyPayload payload) {
         Response response = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .body(payload)
         .when()
-                .post(Routes.properties_post_url);
+                .post(Routes.properties_endpoint);
         return response;
     }
 
     public static Response readUser() {
         Response response = given()
                 .when()
-                .post(Routes.properties_get_url);
+                .post(Routes.properties_endpoint);
         return response;
     }
 }
