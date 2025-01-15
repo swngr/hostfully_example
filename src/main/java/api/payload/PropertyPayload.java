@@ -1,11 +1,13 @@
 package api.payload;
 
-public class Property {
+import java.util.List;
+
+public class PropertyPayload {
 
     String id;
     String alias;
     String countryCode;
-    String createdAt;
+    List<Object> createdAt;
 
     public String getId() {
         return id;
@@ -31,11 +33,11 @@ public class Property {
         this.countryCode = countryCode;
     }
 
-    public String getCreatedAt() {
+    public List<Object> getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(List<Object> createdAt) {
         this.createdAt = createdAt;
     }
 }
