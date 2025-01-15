@@ -3,6 +3,7 @@ import api.endpoints.Routes;
 import api.payload.BookingPayload;
 import api.payload.Guest;
 import api.payload.PropertyPayload;
+import helpers.BasicAuthentication;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
