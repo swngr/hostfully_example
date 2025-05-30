@@ -8,7 +8,7 @@ The goal of this project is to validate the functionality and reliability of the
 1. Use Intellij as your IDE (Community Edition). Link is here: https://www.jetbrains.com/idea/download/ . Scroll down to CE section
 2. Clone the repository:
    ```bash
-   git clone https://github.com/swngr/hostfully_test
+   git clone https://github.com/swngr/hostfully_example
    ```
 3. Install dependencies:
    - For Java with RestAssured: Use Maven to install required dependencies.
